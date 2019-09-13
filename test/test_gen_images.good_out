@@ -1,0 +1,3 @@
+Binary_Image (16#23#) => 0010_0011
+Decimal_Image (23, Width => 4) => 0023
+Float_Image (-23.5, Fore => 4, Aft => 2) => 0023.50

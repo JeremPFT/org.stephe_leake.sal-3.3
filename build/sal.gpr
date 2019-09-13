@@ -1,0 +1,45 @@
+--  For use by other projects. Use sal_devel.gpr for writing tests.
+with "standard_common";
+project SAL is
+
+   for Source_Dirs use
+     ("../source",
+      "../src_x86_gnat"); -- sal.endianness
+
+   --  We assume only one of Profile or Mem_Check is On
+   case Standard_Common.Profile is
+   when "On" =>
+      for Object_Dir use "obj_pro";
+      for Exec_Dir use "exec_pro";
+
+   when "Off" =>
+      case Standard_Common.Mem_Check is
+      when "On" =>
+         for Object_Dir use "obj_mem";
+         for Exec_Dir use "exec_mem";
+
+      when "Off" =>
+         for Object_Dir use "obj";
+         for Exec_Dir use ".";
+      end case;
+   end case;
+
+   for Exec_Dir use ".";
+
+   package Compiler is
+      case Standard_Common.Build is
+      when "Debug" =>
+         for Default_Switches ("Ada") use
+           Standard_Common.Compiler.Debug_Switches &
+           Standard_Common.Compiler.Style_Checks &
+           Standard_Common.Compiler'Default_Switches ("Ada");
+
+      when "Normal" =>
+         for Default_Switches ("Ada") use
+           Standard_Common.Compiler.Release_Switches &
+           Standard_Common.Compiler.Style_Checks &
+           Standard_Common.Compiler'Default_Switches ("Ada");
+      end case;
+   end Compiler;
+
+end SAL;

@@ -1,0 +1,10 @@
+ ---------------
+ UTC-TAI.history
+ ---------------
+ RELATIONSHIP BETWEEN TAI AND UTC, UNTIL 27 DECEMBER 2005
+ -------------------------------------------------------------------------------
+ Limits of validity(at 0h UTC)       TAI - UTC
+
+ 1961  Jan.  1 - 1961  Aug.  1     1.422 818 0s + (MJD - 37 300) x 0.001 296s
+       Oct.  1 - 1972  Jan.  1     2.372 818 0s +        ""
+ 1973  Jan.  1 - 1964  Aug.  1     3.422 818 0s + (MJD - 37 300) x 0.001 296s

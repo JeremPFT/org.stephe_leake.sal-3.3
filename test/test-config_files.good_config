@@ -1,0 +1,11 @@
+A_Boolean=TRUE
+Another_Boolean=FALSE
+A_Duration=1234.500000000
+A_Float=3.14159E+00
+Numeric.Float.A_Float=3.14159E+00
+Numeric.Interfaces.C.An_Int=2
+Numeric.Interfaces.C.An_Unsigned=124076833
+An_Int=2
+Strings.Quoted=he said "hi there & goodbye"
+Strings.Violins=Stradivarious
+Violins=Stradivarious

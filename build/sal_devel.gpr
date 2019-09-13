@@ -1,0 +1,30 @@
+--  For use by other projects writing tests; includes sal-*-aunit
+with "aunit";
+with "aunit_ext";
+with "standard_common";
+with "sal";
+project SAL_Devel is
+
+   for Source_Dirs use
+     ("../source_devel");
+
+   for Object_Dir use "obj";
+   for Exec_Dir use ".";
+
+   package Compiler is
+      case Standard_Common.Build is
+      when "Debug" =>
+         for Default_Switches ("Ada") use
+           Standard_Common.Compiler.Debug_Switches &
+           Standard_Common.Compiler.Style_Checks &
+           Standard_Common.Compiler'Default_Switches ("Ada");
+
+      when "Normal" =>
+         for Default_Switches ("Ada") use
+           Standard_Common.Compiler.Release_Switches &
+           Standard_Common.Compiler.Style_Checks &
+           Standard_Common.Compiler'Default_Switches ("Ada");
+      end case;
+   end Compiler;
+
+end SAL_Devel;

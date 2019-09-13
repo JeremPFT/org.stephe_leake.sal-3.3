@@ -1,0 +1,67 @@
+branches:
+org.stephe_leake.sal            : main/release
+org.stephe_leake.sal.stephe-1   : work
+org.stephe_leake.sal.stephe-2   : spark
+
+ current work
+build/Makefile
+
+    bounded_definite_vectors_sorted
+        can't prove Is_Sorted => ask on spark list
+            need Is_Sorted as type_invariant, but spark does not allow that.
+            because don't know what element_compare does? declare that Pure?
+
+        try again to prove length; did not have Element as expression function.
+
+ references
+d:/Apps/GNAT-gpl_2019/share/doc/spark/pdf/spark2014_rm.pdf
+d:/Apps/GNAT-gpl_2019/share/doc/spark/pdf/spark2014_ug.pdf
+https://www.adacore.com/books/implementation-guidance-spark
+    d:/Archive/GNAT/gpl-2019/ePDF-ImplementationGuidanceSPARK.pdf
+
+ Release process:
+
+(no separate aunit_ext or makerules release)
+
+(dvc-state-multiple
+  '((xmtn . ".")
+    (xmtn . "../org.stephe_leake.makerules")
+    (xmtn . "../org.stephe_leake.aunit_ext")))
+
+build/Makefile clean
+    check for missing clean actions
+
+build/Makefile all
+
+bump version
+    build/Makefile
+        ZIP_VERSION
+
+    ~/Web/Makefile
+        SAL_ZIP_VERSION
+
+    source/sal.adb
+        Version
+
+source/sal.html
+    doc version
+    # review mtn log since last release date
+    $ mtn log --to d:yyyy-mm-dd > release.log
+
+# dvc-state-multiple above
+
+build/Makefile zip tag
+
+d:/Web/stephe-leake/ada/
+    delete old *.bz2*
+
+upload to savannah for Emacs Ada mode:
+    in Cygwin Console (for gpg prompts):
+    cd /cygdrive/c/Projects/org.stephe_leake.sal/build/
+    rm org.stephe_leake.sal-<old>.*
+    gpg -b *.tar.bz2
+
+    scp *.tar.bz2* stephen_leake@dl.sv.nongnu.org:/releases/ada-mode/
+
+Update web:
+    ~/Web/Makefile sal sync

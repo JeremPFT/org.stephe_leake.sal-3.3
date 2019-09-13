@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>SAL (Stephe's Ada Library)</title>
+</head>
+<body>
+
+<h1>SAL (Stephe's Ada Library)</h1>
+
+<p>Current version: 3.2</p>
+
+<p>SAL is a collection of stuff I've found useful in my current projects.</p>
+
+<p>SAL includes several containers, similar to the Ada standard
+containers, but customized for various purposes. See the history below
+for a summary; see the files for the complete list.</p>
+
+<p>SAL includes AUnit extensions; generic Check procedures, to allow
+writing AUnit tests like this:
+  <pre>
+    Check (Message => "square 2", Computed => 2**2, Expected => 4);
+  </pre>
+  There are generics for access, discrete, integer, fixed point types,
+  arrays (1D, 2D, constrained/unconstrained, some with tolerance),
+  etc.</p>
+
+<p>SAL includes a common set of makefile and GNAT project rules that
+simplify higher level makefiles and project files.</p>
+
+<p>Previous versions of SAL had other stuff; I'm no longer maintaining those.</p>
+
+<p>Review the <a href="sal.html#history">release history</a>.</p>
+
+<p>SAL is copyright 1998 - 2006, 2009, 2018 - 2019 by Stephen Leake, released
+under GPL version 3 with the GNAT run time exception.</p>
+
+<p>SAL may be obtained in two ways:
+  <ul>
+    <li>source snapshot: <a href="org.stephe_leake.sal-3.2.tar.bz2">org.stephe_leake.sal-3.2.tar.bz2</a>
+    <li><a href="/ada-france-access.html">monotone server www.ada-france.org</a>, branches org.stephe_leake.sal, org.stephe_leake.aunit_ext, org.stephe_leake.makerules. The ada-france server is maintained by <a href="mailto:ludovic@ludovic-brenta.org">Ludovic Brenta</a>
+  </ul>
+
+<h2>Development tools</h2>
+<p>If you'd like to compile SAL the way I do, here is the list of
+tools I use.</p>
+
+<ul>
+  <li>Windows 8 64 bit, with Debian Testing in a VMware virtual machine
+  <li><a href="http://libre.adacore.com/">GNAT Community Edition 2018</a>
+  <li><a href="https://sourceforge.net/projects/msys2/files/Base/x86_64">MSYS2
+  and Mingw64 </a> for make, bash, sh, diff, grep, find, etc.
+
+  <li><a href="http://www.gnu.org/software/emacs/">emacs
+      26.1</a> the all-around best software development environment. See
+      <a href="../index.html#emacs">my emacs customizations</a>.
+</ul>
+
+<hr>
+
+<h1><a name="history"></a>History</h1>
+
+<dl>
+  <dt>Version 3.3 13 Aug 2019</dt>
+  <dd>
+    <ul>
+      <li>Package sal-gen_bounded_definite_vectors-gen_sorted
+      re-written as sal-gen_unbounded_definite_vectors_sorted
+      <li>Convert some packages to Spark. Accessor functions returning
+      reference types moved to a -gen_refs.ads child package.
+        <ul>
+          <li>sal-gen_bounded_definite_queues.ads
+          <li>sal-gen_bounded_definite_vectors.ads
+          <li>sal-gen_bounded_definite_vectors_sorted.ads
+        </ul>
+      <li>New package sal-gen_bounded_definite_stacks.ads, in Spark
+    </ul>
+  <dt>Version 3.2 11 Jul 2019</dt>
+  <dd>
+    <ul>
+      <li>More changes for WisiToken, Emacs ada-mode
+      <li>Files that are released as Emacs ada-mode source are now copyright FSF.
+      <li>SAL.Gen_Graphs now takes graph size at runtime, provides Find_Cycles, Strongly_Connected_Components.
+      <li>Misc AUnit and Image packages.
+    </ul>
+  <dt>Version 3.1 13 Mar 2019</dt>
+  <dd>
+    <ul>
+      <li>Minor changes for WisiToken, Emacs ada-mode
+    </ul>
+  <dt>Version 3.0 15 Nov 2018</dt>
+  <dd>
+    <ul>
+      <li>Deleted lots of stuff I'm no longer using, added stuff for WisiToken
+      <li>Significant packages:
+        <dl>
+          <dt>sal-config_files</dt><dd>Read and write configuration files, format similar to Java.</dd>
+          <dt>sal-csv</dt><dd>Read and write Comma Separated Value files, actually any delimiter.</dd>
+          <dt>sal-file_names</dt><dd>access parts of file names</dd>
+          <dt>sal-gen_bounded_definite_queues</dt><dd></dd>
+          <dt>sal-gen_bounded_definite_vectors</dt><dd></dd>
+          <dt>sal-gen_bounded_definite_vectors-gen_sorted</dt><dd></dd>
+          <dt>sal-gen_definite_doubly_linked_lists</dt><dd></dd>
+          <dt>sal-gen_definite_doubly_linked_lists_sorted</dt><dd></dd>
+          <dt>sal-gen_histogram</dt><dd>generate gnuplot files for histograms</dd>
+          <dt>sal-gen_indefinite_doubly_linked_lists</dt><dd></dd>
+          <dt>sal-gen_stats</dt><dd>Gather data points, produce mean, standard deviation</dd>
+          <dt>sal-gen_unbounded_definite_min_heaps_binary</dt><dd>
+            <a href="https://en.wikipedia.org/wiki/Binary_heap">Wikipedia article on binary heap</a></dd>
+          <dt>sal-gen_unbounded_definite_min_heaps_fibonacci</dt><dd>
+            <a href="https://en.wikipedia.org/wiki/Fibonacci_heap">Wikipedia article on Fibonacci heap</a></dd>
+          <dt>sal-gen_unbounded_definite_queues</dt><dd></dd>
+          <dt>sal-gen_unbounded_definite_red_black_trees</dt><dd>
+            <a href="https://en.wikipedia.org/wiki/Red%E2%80%93black_tree">Wikipedia article on red-black tree</a></dd>
+          <dt>sal-gen_unbounded_definite_stacks</dt><dd></dd>
+          <dt>sal-gen_unbounded_definite_vectors</dt><dd>plain, comparable, and protected</dd>
+          <dt>sal-gen_unbounded_indefinite_queues</dt><dd></dd>
+          <dt>sal-memory_streams</dt><dd>stream operations on memory buffers</dd>
+          <dt>sal-network_order</dt><dd>convert between native and network byte order</dd>
+          <dt>sal-time_conversions</dt><dd>conversions between various time representations</dd>
+        </dl>
+      </li>
+    </ul>
+  <dt>Version 2.01 11 April 2009</dt>
+  <dd>
+      <ul>
+        <li>Compiles cleanly with GNAT GPL-2008, GNAT 6.2.0
+        <li>Lots of changes; it's been a while :). Not all listed here.
+        <li>spacecraft_math.tex now has examples, and more algorithms.
+  The notation is more consistent, and distinguishes more clearly
+  between active and passive rotations. New algorithms include:
+            <ul>
+              <li>Velocity aberration
+              <li>Moment of inertia for fuel in various tank shapes.
+              <li>Articulated mechanisms.
+            </ul>
+        <li>New code packages:
+            <ul>
+              <li>sal-gen_math-gen_cubic : solving cubic equations
+              <li>sal-gen_math-gen_polynomials-gen_inverse : numerical polynomial inverse
+            </ul>
+      </ul>
+  </dd>
+  <dt>Version 2.00 18 June 2006</dt>
+  <dd>
+      <ul>
+        <li>Compiles cleanly with GNAT GPL-2006, GNAT 5.04a
+        <li>Does not compile with Cygwin release of gcc 3.4.4 Ada; that doesn't support Ada 2005.
+        <li>Lots of changes; it's been a while :). Not all listed here.
+        <li>GNAT 3.15p is no longer supported; SAL uses some Ada 2005 syntax.
+        <li>Lots more AUnit utilities.
+        <li>Lots more Config_Files features.
+        <li>Support both left- and right-multiply quaternions, via
+            SAL.Gen_Math.Gen_DOF_3.Gen_Left, .Gen_Wertz. See <a
+            href="spacecraft_math.pdf">spacecraft_math.pdf</a>.
+        <li>Add SAL.Gen_Math.Gen_Linear_Fit, SAL.Gen_Math.Gen_Polynomial_Fit.
+        <li>Add SAL.Generic_Decimal_Image_Unsigned.
+        <li>Add SAL.Intel_Hex_IO
+        <li>Add SAL.Network_Order.Arrays
+        <li>Delete SAL.Poly.Alg; it was not consitent with SAL.Gen.Alg, and not as useful.
+      </ul>
+  </dd>
+  <dt>Version 1.70 7 August 2004</dt>
+  <dd>
+      <ul>
+        <li>Add gtk_more directory, with useful gtk widgets and test
+            utilities. Some of them aren't quite working.
+        <li>Change gnat project files to a standard naming convention.
+        <li>Interfaces_More renamed to SAL.Interfaces_More
+        <li>In SAL.Endianness, add better support for different length bitfields.
+        <li>In SAL.File_Names, add Replace_Environment_Variables, Resolve_Relative, special case ".".
+        <li>In SAL.Config_Files:
+            <ul>
+              <li>use SAL.File_Names.Replace_Environment_Variables to
+                  allow environment variables in config file names.
+              <li>Add Read_Iterator_Modular
+              <li>Add Read (Iterator) to get the current value.
+              <li>Allow nodes having a value and children.
+            </ul>
+        <li>In AUnit, add catch all exception handler for Set_Up_Case, Tear_Down_Case.
+        <li>Add several *.AUnit children, to support AUnit tests of SAL types.
+        <li>In SAL.Time_Conversions, change Time_Type to fixed point, add extended ASIST format, other functions.
+        <li>Add Text_IO instantiations for Auto_Text_IO run time.
+      </ul>
+  </dd>
+
+  <dt>Version 1.60 3 April 2004</dt>
+  <dd>
+      <ul>
+        <li>Delete sal-gen_math-gen_gauss; not a good implementation.
+        <li>New packages:
+            <ul>
+              <li>sal-file_names
+              <li>sal-gen_sets
+              <li>sal-network_order-*
+              <li>sal-gen-queues-gen_bounded_nonlimited
+            </ul>
+        <li>changes in Config_Files:
+            <ul>
+              <li>Add option Read_Only on Open.
+              <li>Add option Case_Insensitive_Keys on Open.
+              <li>Add Iterator_Type for processing lists of keys.
+              <li>All errors in the config file raise
+                  SAL.Config_File_Error, with a Gnu style error message.
+              <li>Add Is_Open.
+            </ul>
+        <li>Add *.AUnit child packages, to aid in writing AUnit tests
+            of code that uses SAL.
+        <li>sal-gen_math-gen_dof_3.ads: Add "+" renaming of To_Unit_Vector.
+        <li>In spacecraft_math.tex, significantly improve discussions
+            of left multiply vs right multiply and passive vs active.
+            Add explicit references to Wertz and Kane.
+      </ul>
+  </dd>
+
+  <dt>Version 1.51 16 Nov 2003</dt>
+  <dd>
+      <ul>
+        <li>Replace Build/Gnat_Debug, Build/Gnat_Release with
+            Build/debug_windows_x86_gnu,
+            Build/release_windows_x86_gnu; better organization of
+            compiler options.
+        <li>Delete _ROOT from all environment variable names.
+        <li>In spacecraft_math.tex, add discussion of vector, scalar
+            formulation of quaternions.
+        <li>Move a copy of Grace.Config_Files into SAL; easier to use
+            and maintain.
+        <li>In AUnit.Test_Cases, add dispatching Set_Up_Case.
+      </ul>
+  </dd>
+
+  <dt>Version 1.50 2 Sept 2003</dt>
+  <dd>
+      <ul>
+        <li>Merge Auto_Text_IO run-time into SAL; SAL.Gen_Array_Text_IO is
+            significantly different.
+        <li>Use Auto_Text_IO to generate all Text_IO children in SAL;
+            they now all provide Get procedures.
+        <li>SAL.Polynomials renamed to SAL.Gen_Math.Gen_Polynomials;
+            test changed to an AUnit test.
+        <li>New package SAL.Gen_Math.Gen_Gauss for Gaussian distributions.
+        <li>New package SAL.Gen_Math.Gen_Stats for mean and standard deviation.
+        <li>In SAL.Poly.Lists.Double:
+            <ul>
+              <li>add procedure Add; rename of Insert_Tail.
+              <li>add procedure Replace.
+            </ul>
+        <li>In SAL.Poly.Alg; delete generic parameter Item_Type; only
+            used in lower level packages.
+        <li>generic_array_text_io_83 renamed to gen_array_text_io_83
+        <li>test_math_float_den_hart changed to an AUnit test
+        <li>In Makerules, delete standard_debug.gpr,
+            standard_release.gpr; simpler to use standard_common.gpr directly.
+      </ul>
+  </dd>
+  <dt>Version 1.06 24 April 2003</dt>
+  <dd>
+      <ul>
+        <li>Updated to GNAT 3.15p
+        <li>New package: SAL.Gen_FIFO
+        <li>SAL.Gen.Alg : move generic formal parameter Item_Type to
+            child package where it is actually needed. (Suggested by a warning in
+            GNAT 5.01).
+        <li>SAL.Poly.Unbounded_Array : add generic formal parameter Index_Type.
+        <li>SAL.Poly.Stacks.Unbounded_Array : add procedure Pop (Stack, Item).
+        <li>SAL.Gen_Array_Text_IO : delete unnecessary generic formal
+            parameter Zero_Index_Type. Note that Auto_Text_IO has a more powerful
+            generic array text io package.
+        <li>Lots of files : add "constant" where GNAT 3.16a
+            suggests it.
+        <li>Lots of files : add "pragma Unreferenced" where GNAT 3.15p
+            suggests it.
+        <li>Add Maxima files for documentation derivations.
+        <li>Improve some algorithms in SAL.Gen_Math.Gen_DOF_3, Gen_DOF_6 based on Maxima results.
+        <li>Add Maxima files for documentation derivations.
+        <li>Add spacecraft_math documentation; documents algorithms in SAL.Gen_Math.Gen_DOF_3, Gen_DOF_6.
+        <li>Changed some tests to use the Aunit framework; they
+            generated slightly different results on different platforms, so simple
+            diff was no longer enough.
+        <li>Makefile "include"s are cleaned up; all now done from the top Makefile.
+
+      </ul>
+  </dd>
+  <dt>Version 1.05 26 September, 2002</dt>
+  <dd>
+      <ul>
+        <li>Added Runge-Kutta 4th order integrator
+(sal-gen_math-gen_runge_kutta_4th.ads), used in 6 DOF kinematic
+integrator (sal-gen_math-gen_dof_6-gen_integrator.ads).
+        <li>Gen_Math.Gen_DOF_6.Inertia is no longer private; there was no real reason for it.
+        <li>Gen_Math.Gen_DOF_3.Gen_Image, Gen_Math.Gen_DOF_6.Gen_Image
+provide String images of types.
+        <li>Fixed a bug in Gen_Math.Gen_DOF_3.To_Mag_Axis.
+        <li>Gen_Math.Gen_DOF_3.Inverse (inertia) is new, and optimized by Maxima code.
+        <li>Gen_Math.Gen_DOF_6.CM_Mass_Type is new; simpler mass object.
+        <li>Poly.Unbounded_Arrays now have a default Initialization,
+so they are easier to use.
+      </ul>
+  </dd>
+  <dt>Version 1.04b 26 July, 2002</dt>
+  <dd>
+      <ul>
+        <li>Add Null_List and "function None return Iterator" to
+SAL.Poly.Lists.Double, for Grace.Lists implementation.
+      </ul>
+  </dd>
+  <dt>Version 1.04 14 June, 2002</dt>
+  <dd>
+      <ul>
+        <li>Add SAL.Gen_Math.Gen_Manipulator and associated packages,
+instantiations, and tests.
+      </ul>
+  </dd>
+
+  <dt>Version 1.03 9 December, 2001</dt>
+  <dd>
+      <ul>
+        <li>Add missing SAL.Endianness package. Clean up SAL.Convert_Word_Order packages, add test.
+        <li>Add SAL.Gen.Math packages, instantiations, and tests.
+        <li>Add other missing tests.
+      </ul>
+  </dd>
+
+  <dt>Version 1.02 17 November, 2001</dt>
+  <dd>
+      <ul>
+        <li>In sal-poly-binary_trees-sorted, change Boolean
+            Allow_Duplicate_Keys to enumeral Duplicate_Key_Action.
+        <li>Add helper package sal-aux-sort_indefinite_items_definite_keys.
+        <li>Add test for Gray_Code.
+        <li>Add test for Polynomials.
+      </ul>
+  </dd>
+
+  <dt>Version 1.01 2 October, 2000</dt>
+  <dd>Significant upgrade; refined notion of "containers", added many
+      containers and algorithms. Upgraded to
+      GNAT 3.13p. Dropped support for ObjectAda.</dd>
+
+  <dt>Version 1.00 19 October, 1999</dt>
+  <dd>First release.</dd>
+</dl>
+
+<hr>
+<p><script src="/common/footer.js"></script>
+<p><!-- hhmts start --> Last modified: Tue Aug 13 09:49:12 Pacific Daylight Time 2019 <!-- hhmts end -->
+</body>
+</html>

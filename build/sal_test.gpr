@@ -1,0 +1,71 @@
+-- For compiling SAL tests
+with "standard_common";
+with "sal_devel";
+project Sal_Test is
+
+   for Source_Dirs use
+     ("../test");
+
+   case Standard_Common.Profile is
+   when "On" =>
+      for Object_Dir use "obj_pro";
+      for Exec_Dir use "exec_pro";
+
+   when "Off" =>
+      for Object_Dir use "obj";
+      for Exec_Dir use ".";
+   end case;
+
+   package Compiler is
+      case Standard_Common.Build is
+      when "Debug" =>
+         for Default_Switches ("Ada") use
+           Standard_Common.Compiler.Debug_Switches &
+           Standard_Common.Compiler.Style_Checks &
+           Standard_Common.Compiler'Default_Switches ("Ada");
+
+      when "Normal" =>
+         for Default_Switches ("Ada") use
+           Standard_Common.Compiler.Release_Switches &
+           Standard_Common.Compiler.Style_Checks &
+           Standard_Common.Compiler'Default_Switches ("Ada");
+
+         -- As of gnatpro 19.0, optimization -O1, -O2, -O3 takes
+         -- advantage of LRM 11.6(5), which gives permission to omit a
+         -- language-defined check if the _Value_ of the expression
+         -- doesn't have some effect on the external interactions of
+         -- the program.
+         for Switches ("test-config_files-error_message.adb") use
+           Standard_Common.Compiler.Debug_Switches &
+           Standard_Common.Compiler.Style_Checks &
+           Standard_Common.Compiler'Default_Switches ("Ada");
+      end case;
+   end Compiler;
+
+   package Builder is
+      case Standard_Common.Profile is
+      when "On" =>
+         for Default_Switches ("Ada") use Standard_Common.Builder'Default_Switches ("Ada") & ("-pg");
+
+      when "Off" =>
+         for Default_Switches ("Ada") use Standard_Common.Builder'Default_Switches ("Ada");
+      end case;
+
+      --  We use ".exe" extension even on non-Windows, to simplify the makefiles.
+      for Executable_Suffix use ".exe";
+   end Builder;
+
+   package Binder is
+      for Default_Switches ("Ada") use Standard_Common.Binder'Default_Switches ("Ada");
+   end Binder;
+
+   package Linker is
+      case Standard_Common.Profile is
+      when "On" =>
+         --  -lgmem for gnatmem for checking dynamic memory use
+         for Default_Switches ("Ada") use ("-lgmem", "-pg");
+      when "Off" =>
+         null;
+      end case;
+   end Linker;
+end Sal_Test;
